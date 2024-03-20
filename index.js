@@ -29,8 +29,8 @@ app.use(cors({ origin: "*", credentials: true }));
 // Set up routes for handling user-related API requests
 app.use('/api/users/', userRouter);
 
-// // Set up routes for handling admin-related API requests
-// app.use('/api/admin/', adminRoutes);
+// Set up routes for handling admin-related API requests
+app.use('/api/admin/', adminRouter);
 
 // Set up a basic route for the root URL
 app.get('/', (req, res) => res.send("Server is ready"));

@@ -11,7 +11,7 @@ const registerUser = async(req,res) =>{
         const {error,data} = userRegisterSchema.safeParse(req.body);
 
         if(error){
-            res.status(404).json(error.issues[0].message)
+           return res.status(404).json(error.issues[0].message)
         }
         const {name, email, password} = data
 
@@ -42,7 +42,7 @@ const registerUser = async(req,res) =>{
                 email:user.email
             })
         }else{
-            res.status(400).json('invalid user data')
+           return res.status(400).json('invalid user data')
         }
     } catch (error) {
         console.log(error);
@@ -56,7 +56,7 @@ const authUser = async(req,res) =>{
         const {error, data} = userAuthValidation.safeParse(req.body);
 
         if(error){
-            res.status(404).json(error.issues[0].message)
+           return res.status(404).json(error.issues[0].message)
         }
         const { email, password} = data;
 
