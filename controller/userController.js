@@ -91,8 +91,22 @@ const authUser = async(req,res) =>{
     }
 }
 
+
+const logoutUser = async(req,res) =>{
+    try {
+        res.cookie('userJwt','',{
+            httpOnly:true,
+            expires:new Date(0)
+        })
+        res.status(200).json({message:"User Logged out"})
+    } catch (error) {
+        console.log(error);
+        return  res.status(500).json("Internal server error")
+    }
+}
 export {
     registerUser,
-    authUser
+    authUser,
+    logoutUser
 }
 
