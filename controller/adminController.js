@@ -169,10 +169,36 @@ const updateUserData = async(req,res) =>{
     }
 }
 
+const deleteUser = async(req,res) =>{
+    try {
+        const {userId} = req.body;
+
+        if(!userId){
+
+            return res.status(404).json("UserId not received in request. User delete failed.");
+     
+         }
+
+
+        const deletedUser = await prisma.user.delete({
+            where : {
+                id : parseInt(userId,10)
+            }
+        });
+
+        return res.status(201).json('User deleted')
+
+    } catch (error) {
+        console.log(error);
+        return  res.status(500).json("Internal server error")
+    }
+}
+
 export {
     registerAdmin,
     authAdmin,
     logoutAdmin,
     getAllUsers,
-    updateUserData
+    updateUserData,
+    deleteUser
 }
