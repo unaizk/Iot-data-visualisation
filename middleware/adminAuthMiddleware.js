@@ -5,9 +5,11 @@ const prisma = new PrismaClient()
 
 const adminProtect = async(req,res,next)=>{
     let token = req.cookies.adminJwt;
-
+    console.log(' i reached here');
+    console.log(token,'token');
     if(token){
         try {
+            
             const decoded = jwt.verify(token,process.env.JWT_SECRET);
             console.log(decoded,'helooo decoded');
             req.admin = await prisma.admin.findFirst({

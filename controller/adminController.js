@@ -124,10 +124,11 @@ const getAllUsers = async(req,res) =>{
 
 const updateUserData = async(req,res) =>{
     try {
-
+        console.log(req.body,'jjjjjjjjjj');
         const {data, error} = userUpdationValidation.safeParse(req.body)
         console.log("hello");
         if(error){
+            
             return res.status(404).json(error.issues[0].message)
          }
 
