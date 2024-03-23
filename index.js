@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 const port = process.env.PORT || 5000;
 import adminRouter from './routes/adminRoutes.js';
 import userRouter from './routes/userRoute.js'
+import dataRouter from './routes/dataRoute.js'
 
 // Create an instance of the Express application
 const app = express();
@@ -31,6 +32,9 @@ app.use('/api/users/', userRouter);
 
 // Set up routes for handling admin-related API requests
 app.use('/api/admin/', adminRouter);
+
+// Set up routes for handling admin-related API requests
+app.use('/api/iot/', dataRouter);
 
 // Set up a basic route for the root URL
 app.get('/', (req, res) => res.send("Server is ready"));

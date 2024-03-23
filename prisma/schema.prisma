@@ -28,5 +28,47 @@ model Admin {
   password String
 }
 
+model TwoDigitNumber {
+  id   Int     @id @default(autoincrement())
+  data  String
+  time  String
+}
+
+model ThreeDigitNumber {
+  id   Int     @id @default(autoincrement())
+  data  String
+  time  String
+}
+
+model FourDigitNumber {
+  id   Int     @id @default(autoincrement())
+  data  String
+  time  String
+}
+
+model TwoDigitLetter {
+  id   Int     @id @default(autoincrement())
+  data  String
+  time  String
+}
+
+model FourDigitLetter {
+  id   Int     @id @default(autoincrement())
+  data  String
+  time  String
+}
+
+model ConcatTwoValues {
+  id   Int     @id @default(autoincrement())
+  data  String
+  time  String
+}
+
+model ConcatFourValues {
+  id   Int     @id @default(autoincrement())
+  data  String
+  time  String
+}
+
 
 

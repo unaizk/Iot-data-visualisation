@@ -1,12 +1,17 @@
 import z from 'zod';
 
 export const userRegisterSchema = z.object({
-    name : z.string().min(1,{message : "Minimum 1 character required"}),
-    email : z.string().email({message : "Email is required"}),
-    password : z.string().min(4,{message : "password must be 4 character"})
+    name: z.string().min(1, { message: "Name must be at least 1 character" }),
+    email: z.string().email({ message: "Please provide a valid email address" }),
+    password: z.string().min(4, { message: "Password must be at least 4 characters long" })
 });
 
 export const userAuthValidation = z.object({
-    email : z.string().email({message : 'Email is required'}),
-    password : z.string().min(4,{message : "minimum 4 characters is required"})
-})
+    email: z.string().email({ message: 'Please provide a valid email address' }),
+    password: z.string().min(4, { message: "Password must be at least 4 characters long" })
+});
+
+export const userUpdationValidation = z.object({
+    userId : z.number(),
+    name: z.string().min(4, { message: "Password must be at least 4 characters long" }).optional()
+});

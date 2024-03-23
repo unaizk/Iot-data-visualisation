@@ -3,6 +3,7 @@ import generateToken from '../utils/generateTokenUser.js';
 import bcrypt from 'bcrypt'
 import { adminAuthValidation, adminRegisterSchema } from '../validation/adminValidation.js';
 import generateTokenAdmin from '../utils/generateTokenAdmin.js';
+import { userUpdationValidation } from '../validation/userValidation.js';
 
 const prisma = new PrismaClient()
 
@@ -110,9 +111,68 @@ const logoutAdmin = async(req,res) =>{
     }
 }
 
+const getAllUsers = async(req,res) =>{
+    try {
+        const users = await prisma.user.findMany({});;
+
+        return res.status(200).json(users)
+    } catch (error) {
+        console.log(error);
+        return  res.status(500).json("Internal server error")
+    }
+}
+
+const updateUserData = async(req,res) =>{
+    try {
+
+        const {data, error} = userUpdationValidation.safeParse(req.body)
+        console.log("hello");
+        if(error){
+            return res.status(404).json(error.issues[0].message)
+         }
+
+         const {userId, name} = data
+        if(!userId){
+
+           return res.status(404).json("UserId not received in request. User update failed.");
+    
+        }
+
+        console.log(userId);
+
+        const user = await prisma.user.findUnique({
+            where : {
+                id : parseInt(userId,10)
+            }
+        });
+
+        if (!user) {
+
+            
+            return res.status(404).json("User not found.");
+            
+          };
+
+        const updatedUser = await prisma.user.update({
+            where : {
+                id : parseInt(userId,10)
+            },
+            data :{
+                name: name ? name : user.name, 
+            }
+        })
+
+        return res.status(201).json(updatedUser)
+    } catch (error) {
+        console.log(error);
+        return  res.status(500).json("Internal server error")
+    }
+}
 
 export {
     registerAdmin,
     authAdmin,
-    logoutAdmin
+    logoutAdmin,
+    getAllUsers,
+    updateUserData
 }
