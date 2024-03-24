@@ -26,7 +26,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookieParser());
 
 
-app.use(cors({ origin: "*", credentials: true }));
+app.use(cors({ origin: "https://iot-data-frontend.unaizk.com", credentials: true }));
 // Set up routes for handling user-related API requests
 app.use('/api/users/', userRouter);
 
