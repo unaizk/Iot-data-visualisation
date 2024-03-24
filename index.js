@@ -12,6 +12,7 @@ import dataRouter from './routes/dataRoute.js'
 
 // Create an instance of the Express application
 const app = express();
+app.use(cors({ origin:"https://iot-data-frontend.unaizk.com", credentials: true }));
 
 // Middleware to parse incoming JSON data in the request body.
 // This allows us to access the JSON data in route handlers using req.body.
@@ -26,7 +27,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookieParser());
 
 
-app.use(cors({ origin: "https://iot-data-frontend.unaizk.com", credentials: true }));
+
 // Set up routes for handling user-related API requests
 app.use('/api/users/', userRouter);
 
