@@ -29,13 +29,13 @@ app.use(cookieParser());
 
 
 // Set up routes for handling user-related API requests
-app.use('/api/users/', userRouter);
+app.use('/api/users', userRouter);
 
 // Set up routes for handling admin-related API requests
-app.use('/api/admin/', adminRouter);
+app.use('/api/admin', adminRouter);
 
 // Set up routes for handling admin-related API requests
-app.use('/api/iot/', dataRouter);
+app.use('/api/iot', dataRouter);
 
 // Set up a basic route for the root URL
 app.get('/', (req, res) => res.send("Server is ready"));
