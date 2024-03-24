@@ -193,6 +193,38 @@ const deleteUser = async(req,res) =>{
         console.log(error);
         return  res.status(500).json("Internal server error")
     }
+};
+
+
+const getAdminIotDatas = async(req,res) =>{
+    try {
+        const twoDigitNumber = await prisma.twoDigitNumber.findMany({});
+        const threeDigitNumber = await prisma.threeDigitNumber.findMany({});
+        const fourDigitNumber = await prisma.fourDigitNumber.findMany({});
+        const fourDigitLetter = await prisma.fourDigitLetter.findMany({});
+        const twoDigitLetter = await prisma.twoDigitLetter.findMany({});
+        const concatTwoValues = await prisma.concatTwoValues.findMany({});
+        const concatFourValues = await prisma.concatFourValues.findMany({})
+
+        
+        
+        const formattedData = {
+            twoDigitNumber,
+            threeDigitNumber,
+            fourDigitNumber,
+            fourDigitLetter,
+            twoDigitLetter,
+            concatTwoValues,
+            concatFourValues
+        };
+
+        
+
+        return res.status(200).json(formattedData);
+    } catch (error) {
+        console.log(error);
+        return  res.status(500).json("Internal server error")
+    }
 }
 
 export {
@@ -201,5 +233,6 @@ export {
     logoutAdmin,
     getAllUsers,
     updateUserData,
-    deleteUser
+    deleteUser,
+    getAdminIotDatas
 }

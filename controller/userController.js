@@ -104,9 +104,37 @@ const logoutUser = async(req,res) =>{
         return  res.status(500).json("Internal server error")
     }
 }
+
+const getIotDatas = async (req, res) => {
+    try {
+        const twoDigitNumber = await prisma.twoDigitNumber.findMany({});
+        const threeDigitNumber = await prisma.threeDigitNumber.findMany({});
+        const fourDigitNumber = await prisma.fourDigitNumber.findMany({});
+        const fourDigitLetter = await prisma.fourDigitLetter.findMany({});
+        const twoDigitLetter = await prisma.twoDigitLetter.findMany({});
+
+        
+        
+        const formattedData = {
+            twoDigitNumber,
+            threeDigitNumber,
+            fourDigitNumber,
+            fourDigitLetter,
+            twoDigitLetter
+        };
+
+        
+
+        return res.status(200).json(formattedData);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json("Internal server error");
+    }
+}
 export {
     registerUser,
     authUser,
-    logoutUser
+    logoutUser,
+    getIotDatas
 }
 
