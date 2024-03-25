@@ -135,6 +135,7 @@ const getIotDatas = async (req, res) => {
                 twoDigitNumber,
                 threeDigitNumber,
             ];
+            console.log(formattedData,'formattedData');
             return res.status(200).json(formattedData);
         }
 
@@ -202,6 +203,7 @@ const getIotDatas = async (req, res) => {
                 threeDigitNumber,
                 fourDigitNumber,
             ];
+
             return res.status(200).json(formattedData);
         }
     } catch (error) {
