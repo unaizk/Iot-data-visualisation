@@ -132,7 +132,8 @@ const updateUserData = async(req,res) =>{
             return res.status(404).json(error.issues[0].message)
          }
 
-         const {userId, name} = data
+         const {userId, name, roll} = data
+         console.log(roll,'rolllllllllllllllll');
         if(!userId){
 
            return res.status(404).json("UserId not received in request. User update failed.");
@@ -160,6 +161,7 @@ const updateUserData = async(req,res) =>{
             },
             data :{
                 name: name ? name : user.name, 
+                roll : roll ? roll : user.roll
             }
         })
 
