@@ -119,26 +119,43 @@ const getIotDatas = async (req, res) => {
         if(!user){
             return res.status(404).json("User not found")
         }
+
+        function addNameField(data, name) {
+            return data.map(item => ({ ...item, name }));
+        }
          
         if(user.roll == "viewer"){
-            const twoDigitNumber = await prisma.twoDigitNumber.findMany({});
-            const threeDigitNumber = await prisma.threeDigitNumber.findMany({});
-            const formattedData = {
+            const twoDigitNumberData = await prisma.twoDigitNumber.findMany({});
+            const threeDigitNumberData = await prisma.threeDigitNumber.findMany({});
+
+            const twoDigitNumber = addNameField(twoDigitNumberData, "TWO DIGIT NUMBER");
+            const threeDigitNumber = addNameField(threeDigitNumberData, "THREE DIGIT NUMBER");
+        
+            const formattedData = [
                 twoDigitNumber,
                 threeDigitNumber,
-            };
+            ];
             return res.status(200).json(formattedData);
         }
 
         if(user.roll == "manager"){
-            const twoDigitNumber = await prisma.twoDigitNumber.findMany({});
-            const threeDigitNumber = await prisma.threeDigitNumber.findMany({});
-            const fourDigitNumber = await prisma.fourDigitNumber.findMany({});
-            const fourDigitLetter = await prisma.fourDigitLetter.findMany({});
-            const twoDigitLetter = await prisma.twoDigitLetter.findMany({});
-            const concatTwoValues = await prisma.concatTwoValues.findMany({});
-            const concatFourValues = await prisma.concatFourValues.findMany({})
-            const formattedData = {
+            const twoDigitNumberData = await prisma.twoDigitNumber.findMany({});
+            const threeDigitNumberData = await prisma.threeDigitNumber.findMany({});
+            const fourDigitNumberData = await prisma.fourDigitNumber.findMany({});
+            const fourDigitLetterData = await prisma.fourDigitLetter.findMany({});
+            const twoDigitLetterData = await prisma.twoDigitLetter.findMany({});
+            const concatTwoValuesData = await prisma.concatTwoValues.findMany({});
+            const concatFourValuesData = await prisma.concatFourValues.findMany({})
+
+            const twoDigitNumber = addNameField(twoDigitNumberData, "TWO DIGIT NUMBER");
+            const threeDigitNumber = addNameField(threeDigitNumberData, "THREE DIGIT NUMBER");
+            const fourDigitNumber = addNameField(fourDigitNumberData, "FOUR DIGIT NUMBER");
+            const fourDigitLetter = addNameField(fourDigitLetterData, "FOUR DIGIT LETTER");
+            const twoDigitLetter = addNameField(twoDigitLetterData, "TWO DIDGIT LETTER");
+            const concatTwoValues = addNameField(concatTwoValuesData, "CONCAT TWO VALUES");
+            const concatFourValues = addNameField(concatFourValuesData, "CONCAT FOUR VALUES");
+
+            const formattedData = [
                 twoDigitNumber,
                 threeDigitNumber,
                 fourDigitNumber,
@@ -146,34 +163,45 @@ const getIotDatas = async (req, res) => {
                 twoDigitLetter,
                 concatTwoValues,
                 concatFourValues
-            };
+            ];
             return res.status(200).json(formattedData);
         }
 
         if(user.roll == "engineer"){
-            const twoDigitNumber = await prisma.twoDigitNumber.findMany({});
-            const threeDigitNumber = await prisma.threeDigitNumber.findMany({});
-            const fourDigitNumber = await prisma.fourDigitNumber.findMany({});
-            const fourDigitLetter = await prisma.fourDigitLetter.findMany({});
-            const twoDigitLetter = await prisma.twoDigitLetter.findMany({});
-            const formattedData = {
+            const twoDigitNumberData = await prisma.twoDigitNumber.findMany({});
+            const threeDigitNumberData = await prisma.threeDigitNumber.findMany({});
+            const fourDigitNumberData = await prisma.fourDigitNumber.findMany({});
+            const fourDigitLetterData = await prisma.fourDigitLetter.findMany({});
+            const twoDigitLetterData = await prisma.twoDigitLetter.findMany({});
+
+            const twoDigitNumber = addNameField(twoDigitNumberData, "TWO DIGIT NUMBER");
+            const threeDigitNumber = addNameField(threeDigitNumberData, "THREE DIGIT NUMBER");
+            const fourDigitNumber = addNameField(fourDigitNumberData, "FOUR DIGIT NUMBER");
+            const fourDigitLetter = addNameField(fourDigitLetterData, "FOUR DIGIT LETTER");
+            const twoDigitLetter = addNameField(twoDigitLetterData, "TWO DIDGIT LETTER");
+            const formattedData = [
                 twoDigitNumber,
                 threeDigitNumber,
                 fourDigitNumber,
                 fourDigitLetter,
                 twoDigitLetter
-            };
+            ];
             return res.status(200).json(formattedData);
         }
         if(user.roll == "supervisor"){
-            const twoDigitNumber = await prisma.twoDigitNumber.findMany({});
-            const threeDigitNumber = await prisma.threeDigitNumber.findMany({});
-            const fourDigitNumber = await prisma.fourDigitNumber.findMany({});
-            const formattedData = {
+            const twoDigitNumberData = await prisma.twoDigitNumber.findMany({});
+            const threeDigitNumberData = await prisma.threeDigitNumber.findMany({});
+            const fourDigitNumberData = await prisma.fourDigitNumber.findMany({});
+
+            const twoDigitNumber = addNameField(twoDigitNumberData, "TWO DIGIT NUMBER");
+            const threeDigitNumber = addNameField(threeDigitNumberData, "THREE DIGIT NUMBER");
+            const fourDigitNumber = addNameField(fourDigitNumberData, "FOUR DIGIT NUMBER");
+
+            const formattedData = [
                 twoDigitNumber,
                 threeDigitNumber,
                 fourDigitNumber,
-            };
+            ];
             return res.status(200).json(formattedData);
         }
     } catch (error) {
