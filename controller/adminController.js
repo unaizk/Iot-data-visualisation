@@ -124,7 +124,7 @@ const getAllUsers = async(req,res) =>{
 
 const updateUserData = async(req,res) =>{
     try {
-        console.log(req.body,'jjjjjjjjjj');
+        
         const {data, error} = userUpdationValidation.safeParse(req.body)
         console.log("hello");
         if(error){
@@ -133,7 +133,6 @@ const updateUserData = async(req,res) =>{
          }
 
          const {userId, name, roll} = data
-         console.log(roll,'rolllllllllllllllll');
         if(!userId){
 
            return res.status(404).json("UserId not received in request. User update failed.");

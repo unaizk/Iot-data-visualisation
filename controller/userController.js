@@ -108,25 +108,74 @@ const logoutUser = async(req,res) =>{
 
 const getIotDatas = async (req, res) => {
     try {
-        const twoDigitNumber = await prisma.twoDigitNumber.findMany({});
-        const threeDigitNumber = await prisma.threeDigitNumber.findMany({});
-        const fourDigitNumber = await prisma.fourDigitNumber.findMany({});
-        const fourDigitLetter = await prisma.fourDigitLetter.findMany({});
-        const twoDigitLetter = await prisma.twoDigitLetter.findMany({});
+        const userId = req.user.id;
 
-        
-        
-        const formattedData = {
-            twoDigitNumber,
-            threeDigitNumber,
-            fourDigitNumber,
-            fourDigitLetter,
-            twoDigitLetter
-        };
+        const user = await prisma.user.findUnique({
+            where : {
+                id : parseInt(userId,10)
+            }
+        });
 
-        
+        if(!user){
+            return res.status(404).json("User not found")
+        }
+         
+        if(user.roll == "viewer"){
+            const twoDigitNumber = await prisma.twoDigitNumber.findMany({});
+            const threeDigitNumber = await prisma.threeDigitNumber.findMany({});
+            const formattedData = {
+                twoDigitNumber,
+                threeDigitNumber,
+            };
+            return res.status(200).json(formattedData);
+        }
 
-        return res.status(200).json(formattedData);
+        if(user.roll == "manager"){
+            const twoDigitNumber = await prisma.twoDigitNumber.findMany({});
+            const threeDigitNumber = await prisma.threeDigitNumber.findMany({});
+            const fourDigitNumber = await prisma.fourDigitNumber.findMany({});
+            const fourDigitLetter = await prisma.fourDigitLetter.findMany({});
+            const twoDigitLetter = await prisma.twoDigitLetter.findMany({});
+            const concatTwoValues = await prisma.concatTwoValues.findMany({});
+            const concatFourValues = await prisma.concatFourValues.findMany({})
+            const formattedData = {
+                twoDigitNumber,
+                threeDigitNumber,
+                fourDigitNumber,
+                fourDigitLetter,
+                twoDigitLetter,
+                concatTwoValues,
+                concatFourValues
+            };
+            return res.status(200).json(formattedData);
+        }
+
+        if(user.roll == "engineer"){
+            const twoDigitNumber = await prisma.twoDigitNumber.findMany({});
+            const threeDigitNumber = await prisma.threeDigitNumber.findMany({});
+            const fourDigitNumber = await prisma.fourDigitNumber.findMany({});
+            const fourDigitLetter = await prisma.fourDigitLetter.findMany({});
+            const twoDigitLetter = await prisma.twoDigitLetter.findMany({});
+            const formattedData = {
+                twoDigitNumber,
+                threeDigitNumber,
+                fourDigitNumber,
+                fourDigitLetter,
+                twoDigitLetter
+            };
+            return res.status(200).json(formattedData);
+        }
+        if(user.roll == "supervisor"){
+            const twoDigitNumber = await prisma.twoDigitNumber.findMany({});
+            const threeDigitNumber = await prisma.threeDigitNumber.findMany({});
+            const fourDigitNumber = await prisma.fourDigitNumber.findMany({});
+            const formattedData = {
+                twoDigitNumber,
+                threeDigitNumber,
+                fourDigitNumber,
+            };
+            return res.status(200).json(formattedData);
+        }
     } catch (error) {
         console.error(error);
         return res.status(500).json("Internal server error");
