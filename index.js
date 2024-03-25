@@ -12,6 +12,8 @@ import dataRouter from './routes/dataRoute.js'
 
 // Create an instance of the Express application
 const app = express();
+
+
 app.use(cors({ origin:"https://iot-data-frontend.unaizk.com", credentials: true }));
 
 // Middleware to parse incoming JSON data in the request body.
